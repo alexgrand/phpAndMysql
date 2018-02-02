@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Sample Form</title>
+</head>
+<body>
+	<form id="myForm">
+	 <label for="first_name">First Name</label><br/>
+	 <input type="text" name="name[first]"
+	id="first_name" class="name"/><br/>
+	 <label for="last_name">Last Name</label><br/>
+	 <input type="text" name="name[last]"
+	id="last_name" class="name"/><br/>
+	 <button type="submit">Submit Form </button>
+ </form>
+ <hr>
+ <div id="webConsole">
+ 	<h3>Web Console</h3>
+ </div>
+
+<script src="//code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous""></script>
+<script>
+	var webConsole = function (msg) {
+		var console = $('#webConsole');
+		var newMessage = $('<p>').text(msg);
+		console.append(newMessage);
+	}
+
+	$(function () {
+		$('#first_name').attr('placeholder', 'Johnny');
+		$('#last_name').attr('placeholder','Appleseed');
+	});
+
+	$('#myForm').on('submit',function (e) {
+		var first_name = $('#first_name').val();
+		var last_name = $('#last_name').val();
+
+		webConsole('The form was submitted');
+		alert('Hello, ' + first_name + ' ' + last_name);
+	});
+
+	$('.name').on('focusout',function (e) {
+		var nameField = $(e.target);
+		webConsole("Name field '"+nameField.attr('id')+"' was upated to '"+nameField.val()+"'");
+	});
+</script>
+
+</body>
+</html>
